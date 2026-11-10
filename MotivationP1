@@ -1,0 +1,27 @@
+from tkinter import *
+import random
+import time
+window=Tk()
+canvas=Canvas(window, height=400, width=700, bg="white")
+canvas.pack()
+n=0
+posters=["2 heads are better, \nthan three heads on one body, \nas three do not fit", "Armies are not brave, \nArmies are just lunatics, \nwith many big guns"]
+
+def createscreen():
+    global n
+    canvas.delete("all")
+    canvas.create_rectangle(20, 20, 620, 220, fill="#edd17e")
+    canvas.create_line(320, 20, 320, 220)
+    canvas.create_text(170, 120, fill="black", text=posters[n], font=("Courier New", "10"))
+    canvas.create_text(470, 120, fill="black", text=posters[n+1], font=("Courier New", "10"))
+    canvas.after(20, createscreen)
+
+def onclick(event):
+    global n
+    n+=1
+    if n==len(posters)-1:
+        n=0
+
+createscreen()
+window.bind("<Button-1>", onclick)
+window.mainloop()
